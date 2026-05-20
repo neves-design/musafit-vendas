@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musa Fit 60D — Método Exclusivo para Mulheres</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#fff0f5;color:#1a1a2e;min-height:100vh}
+  :root{--pink:#d63384;--pink-light:#f8d7e3;--pink-dark:#a0254f;--green:#198754;--green-light:#d1e7dd;--yellow:#ffc107;--red:#dc3545;--gray:#6c757d;--white:#fff;--radius:12px}
+
+  /* HEADER */
+  #header{background:linear-gradient(135deg,#d63384,#a0254f);color:#fff;text-align:center;padding:18px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(214,51,132,.35)}
+  #header h1{font-size:1.1rem;font-weight:700;letter-spacing:.5px}
+  #timer-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;background:rgba(0,0,0,.22);border-radius:8px;padding:7px 16px;max-width:340px;margin-left:auto;margin-right:auto}
+  #timer-bar span{font-size:.78rem;opacity:.9}
+  #timer-display{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;color:#ffe082;letter-spacing:2px}
+  #spots{font-size:.78rem;margin-top:4px;color:#ffe082;text-align:center;font-weight:600}
+
+  /* HERO */
+  #hero{background:linear-gradient(135deg,#fff0f8,#fce4ec);text-align:center;padding:36px 20px 28px}
+  #hero .badge{display:inline-block;background:#d63384;color:#fff;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:20px;padding:5px 16px;margin-bottom:14px}
+  #hero h2{font-size:1.9rem;font-weight:800;line-height:1.25;color:#1a1a2e;margin-bottom:10px}
+  #hero h2 span{color:#d63384}
+  #hero p{font-size:.95rem;color:#555;max-width:480px;margin:0 auto 20px;line-height:1.6}
+  #hero .cta-hero{display:inline-block;background:#d63384;color:#fff;font-weight:700;font-size:1rem;padding:14px 36px;border-radius:30px;text-decoration:none;cursor:pointer;border:none;box-shadow:0 4px 18px rgba(214,51,132,.35);transition:transform .15s}
+  #hero .cta-hero:hover{transform:scale(1.04)}
+
+  /* SOCIAL PROOF STRIP */
+  .proof-strip{background:#fff;border-top:1.5px solid #f8d7e3;border-bottom:1.5px solid #f8d7e3;padding:12px 16px;overflow:hidden}
+  .proof-inner{display:flex;gap:32px;animation:scroll-x 22s linear infinite;width:max-content}
+  .proof-item{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:.82rem;color:#444}
+  .proof-item .star{color:#ffc107;font-size:.9rem}
+  @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* QUIZ SECTION */
+  #quiz-section{padding:32px 16px;max-width:600px;margin:0 auto}
+  .quiz-card{background:#fff;border-radius:var(--radius);box-shadow:0 4px 24px rgba(0,0,0,.08);padding:28px 24px;animation:fadeIn .4s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .quiz-step-label{font-size:.72rem;color:var(--pink);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .quiz-progress{height:6px;background:#f0e0ea;border-radius:4px;margin-bottom:18px;overflow:hidden}
+  .quiz-progress-fill{height:100%;background:linear-gradient(90deg,#d63384,#a0254f);border-radius:4px;transition:width .4s ease}
+  .quiz-q{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:18px;line-height:1.4}
+  .quiz-options{display:flex;flex-direction:column;gap:10px}
+  .quiz-opt{background:#fff;border:1.5px solid #e8b0ca;border-radius:10px;padding:13px 16px;font-size:.95rem;cursor:pointer;text-align:left;transition:background .15s,border-color .15s;color:#1a1a2e;font-weight:500}
+  .quiz-opt:hover{background:#fff0f5;border-color:var(--pink)}
+  .quiz-opt.selected{background:#fce4ec;border-color:var(--pink);color:var(--pink-dark)}
+  .quiz-nav{display:flex;justify-content:flex-end;margin-top:20px}
+  .btn-next{background:#d63384;color:#fff;border:none;border-radius:24px;padding:11px 30px;font-size:.95rem;font-weight:700;cursor:pointer;transition:transform .15s}
+  .btn-next:hover{transform:scale(1.04)}
+  .btn-next:disabled{background:#e0b0c8;cursor:not-allowed}
+
+  /* RESULT */
+  #result-section{display:none;padding:32px 16px;max-width:640px;margin:0 auto}
+  .result-card{background:#fff;border-radius:16px;box-shadow:0 4px 28px rgba(0,0,0,.09);padding:32px 24px;text-align:center}
+  .result-icon{font-size:3rem;margin-bottom:8px}
+  .result-title{font-size:1.5rem;font-weight:800;color:#d63384;margin-bottom:8px}
+  .result-desc{font-size:.95rem;color:#555;line-height:1.65;margin-bottom:22px}
+  .result-includes{background:#fff0f5;border-radius:10px;padding:16px 20px;margin-bottom:22px;text-align:left}
+  .result-includes h4{font-size:.85rem;font-weight:700;color:#d63384;margin-bottom:10px;text-transform:uppercase;letter-spacing:.6px}
+  .result-includes ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .result-includes li{font-size:.9rem;color:#333;display:flex;align-items:center;gap:8px}
+  .result-includes li::before{content:"✅";font-size:.85rem}
+
+  /* PRICE BOX */
+  .price-box{background:linear-gradient(135deg,#fff0f8,#fce4ec);border:2px solid #d63384;border-radius:14px;padding:22px 20px;margin-bottom:22px}
+  .price-from{font-size:.85rem;color:#999;text-decoration:line-through;margin-bottom:2px}
+  .price-main{font-size:2.4rem;font-weight:800;color:#d63384;line-height:1.1}
+  .price-main sup{font-size:1rem;vertical-align:super}
+  .price-note{font-size:.78rem;color:#666;margin-top:4px}
+  .price-urgency{display:inline-block;background:#dc3545;color:#fff;font-size:.75rem;font-weight:700;border-radius:6px;padding:3px 10px;margin-top:8px}
+
+  /* CTA BUTTON */
+  .cta-main{display:block;background:linear-gradient(135deg,#d63384,#a0254f);color:#fff;font-size:1.1rem;font-weight:800;text-align:center;padding:17px 28px;border-radius:30px;text-decoration:none;border:none;cursor:pointer;width:100%;box-shadow:0 6px 22px rgba(214,51,132,.38);transition:transform .15s;animation:pulse-cta 2s infinite}
+  @keyframes pulse-cta{0%,100%{box-shadow:0 6px 22px rgba(214,51,132,.38)}50%{box-shadow:0 8px 32px rgba(214,51,132,.58)}}
+  .cta-main:hover{transform:scale(1.03)}
+  .guarantee{display:flex;align-items:center;gap:10px;font-size:.8rem;color:#555;margin-top:14px;justify-content:center}
+  .guarantee span{font-size:1.4rem}
+
+  /* TESTIMONIALS */
+  #testimonials{padding:36px 16px;background:linear-gradient(180deg,#fff0f8,#fff)}
+  #testimonials h3{text-align:center;font-size:1.35rem;font-weight:800;color:#1a1a2e;margin-bottom:24px}
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:800px;margin:0 auto}
+  .testi-card{background:#fff;border:1px solid #f8d7e3;border-radius:12px;padding:18px 16px}
+  .testi-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .testi-avatar{width:40px;height:40px;border-radius:50%;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-weight:700;color:#d63384;font-size:.95rem;flex-shrink:0}
+  .testi-name{font-weight:700;font-size:.9rem;color:#1a1a2e}
+  .testi-loc{font-size:.75rem;color:#888}
+  .testi-stars{color:#ffc107;font-size:.85rem;margin-bottom:7px}
+  .testi-text{font-size:.88rem;color:#444;line-height:1.55}
+  .testi-result{display:inline-block;background:#d1e7dd;color:#0a5933;font-size:.75rem;font-weight:700;border-radius:6px;padding:3px 9px;margin-top:8px}
+
+  /* CHECKOUT SECTION */
+  #checkout-section{padding:36px 16px;max-width:600px;margin:0 auto}
+  .checkout-card{background:#fff;border-radius:16px;box-shadow:0 4px 28px rgba(0,0,0,.09);padding:28px 24px}
+  .checkout-card h3{font-size:1.25rem;font-weight:800;color:#1a1a2e;margin-bottom:6px;text-align:center}
+  .checkout-card p{font-size:.88rem;color:#666;text-align:center;margin-bottom:22px}
+  /* EDITABLE AREA */
+  .editable-area{border:2.5px dashed #d63384;border-radius:12px;padding:28px 20px;text-align:center;background:#fff9fc;cursor:pointer;transition:background .15s;position:relative}
+  .editable-area:hover{background:#fff0f5}
+  .edit-label{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#d63384;color:#fff;font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:10px;letter-spacing:.5px;white-space:nowrap}
+  .editable-area .placeholder-icon{font-size:2.5rem;margin-bottom:8px;display:block}
+  .editable-area h4{font-size:1rem;font-weight:700;color:#d63384;margin-bottom:6px}
+  .editable-area p{font-size:.85rem;color:#888;margin-bottom:0}
+  .edit-instructions{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px 16px;margin-top:20px;font-size:.82rem;color:#664d03;line-height:1.55}
+  .edit-instructions strong{display:block;margin-bottom:4px;font-size:.85rem}
+
+  /* FOOTER */
+  footer{background:#1a1a2e;color:#aaa;text-align:center;padding:22px 16px;font-size:.78rem;line-height:1.7}
+  footer a{color:#f8d7e3;text-decoration:none}
+
+  /* MISC */
+  .hidden{display:none!important}
+  .fadeshow{animation:fadeIn .45s ease}
+
+  @media(max-width:480px){
+    #hero h2{font-size:1.5rem}
+    .price-main{font-size:2rem}
+    .quiz-card{padding:20px 16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER + TIMER -->
+<header id="header">
+  <h1>🔥 OFERTA ESPECIAL — MUSA FIT 60D</h1>
+  <div id="timer-bar">
+    <span>⏳ Termina em:</span>
+    <span id="timer-display">01:00:00</span>
+  </div>
+  <div id="spots">⚡ Apenas <span id="spots-count">23</span> vagas restantes nesta oferta!</div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="badge">✨ Método exclusivo para mulheres</div>
+  <h2>Descubra se você está prontar para<br><span>emagrecer e se tornar uma Musa Fit em 60 dias</span></h2>
+  <p>Responda nosso quiz rápido e veja como milhares de mulheres já transformaram o corpo sem dietas malucas ou academia cara.</p>
+  <button class="cta-hero" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">🎯 Fazer o Quiz Agora — Grátis</button>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip" aria-hidden="true">
+  <div class="proof-inner">
+    <div class="proof-item"><span class="star">★★★★★</span> Luciana M. perdeu 12kg em 2 meses</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Fernanda K. — "Melhor investimento da minha vida"</div>
+    <div class="proof-item"><span class="star">★★★★★</span> +18.000 mulheres já transformaram o corpo</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Amanda R. eliminou 8cm de barriga em 45 dias</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Priscila T. — "Emagreci sem passar fome!"</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Carol S. — "60 dias que mudaram minha vida"</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Luciana M. perdeu 12kg em 2 meses</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Fernanda K. — "Melhor investimento da minha vida"</div>
+    <div class="proof-item"><span class="star">★★★★★</span> +18.000 mulheres já transformaram o corpo</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Amanda R. eliminou 8cm de barriga em 45 dias</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Priscila T. — "Emagreci sem passar fome!"</div>
+    <div class="proof-item"><span class="star">★★★★★</span> Carol S. — "60 dias que mudaram minha vida"</div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+  <div id="quiz-wrapper" class="quiz-card">
+    <div class="quiz-step-label" id="step-label">Pergunta 1 de 6</div>
+    <div class="quiz-progress"><div class="quiz-progress-fill" id="progress-fill" style="width:16.6%"></div></div>
+    <div class="quiz-q" id="quiz-question">Você tem dificuldade em manter uma rotina de exercícios?</div>
+    <div class="quiz-options" id="quiz-opts"></div>
+    <div class="quiz-nav">
+      <button class="btn-next" id="btn-next" disabled onclick="nextStep()">Próxima →</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT (hidden initially) -->
+<section id="result-section">
+  <div class="result-card">
+    <div class="result-icon" id="result-icon">🎉</div>
+    <div class="result-title" id="result-title">Seu perfil está pronto!</div>
+    <div class="result-desc" id="result-desc"></div>
+
+    <div class="result-includes">
+      <h4>O que você recebe no Musa Fit 60D:</h4>
+      <ul>
+        <li>Plano de treinos em casa de 60 dias — sem academia</li>
+        <li>Cardápio personalizado sem dietas malucas</li>
+        <li>Guia anti-inchaço com resultados em 7 dias</li>
+        <li>Suporte com lives ao vivo com Guilherme Henrique</li>
+        <li>Acesso vitalício com atualizações constantes</li>
+        <li>Comunidade exclusiva de mulheres Musa Fit</li>
+      </ul>
+    </div>
+
+    <div class="price-box">
+      <div class="price-from">De R$ 97,00</div>
+      <div class="price-main"><sup>R$</sup> 29<sup>,90</sup></div>
+      <div class="price-note">Pagamento único • Acesso imediato</div>
+      <div class="price-urgency">⚡ Oferta válida apenas enquanto o timer estiver rodando</div>
+    </div>
+
+    <button class="cta-main" onclick="document.getElementById('checkout-section').scrollIntoView({behavior:'smooth'})">
+      🔒 QUERO MEU ACESSO POR R$ 29,90
+    </button>
+    <div class="guarantee">
+      <span>🛡️</span>
+      <span>Garantia de 7 dias. Se não gostar, devolvemos 100% do seu dinheiro sem burocracia.</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h3>💬 Mulheres que já transformaram o corpo</h3>
+  <div class="testi-grid">
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">LM</div>
+        <div><div class="testi-name">Luciana Mendes</div><div class="testi-loc">São Paulo, SP</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Eu tentei de tudo e nada funcionava. Com o Musa Fit 60D eu perdi 12kg sem precisar de academia. Os treinos são rápidos e fáceis de encaixar na rotina!"</div>
+      <span class="testi-result">📉 -12kg em 60 dias</span>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">AR</div>
+        <div><div class="testi-name">Amanda Rocha</div><div class="testi-loc">Belo Horizonte, MG</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Estava desanimada após a gravidez. O método é gentil, progressivo e funcionou. Em 45 dias minha barriga reduziu 8cm. Me sinto musa de verdade!"</div>
+      <span class="testi-result">📏 -8cm de barriga</span>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">FK</div>
+        <div><div class="testi-name">Fernanda Kato</div><div class="testi-loc">Curitiba, PR</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Melhor investimento que já fiz pela minha saúde. Por R$ 29,90 eu esperava algo básico, mas o conteúdo é completo e as lives tiram qualquer dúvida!"</div>
+      <span class="testi-result">🔥 -9kg e autoestima renovada</span>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">CS</div>
+        <div><div class="testi-name">Carol Souza</div><div class="testi-loc">Rio de Janeiro, RJ</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"60 dias que mudaram completamente minha vida. Desinchei logo na primeira semana, soltei a calça que não fechava há 2 anos. Indico pra todas as amigas!"</div>
+      <span class="testi-result">✨ -7kg e desinchada</span>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">PT</div>
+        <div><div class="testi-name">Priscila Torres</div><div class="testi-loc">Fortaleza, CE</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Emagreci sem passar fome e sem sofrimento. O cardápio é gostoso e os treinos podem ser feitos no quarto mesmo. Resultado real em 60 dias!"</div>
+      <span class="testi-result">💪 -11kg sem dieta radical</span>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-top">
+        <div class="testi-avatar">JN</div>
+        <div><div class="testi-name">Juliana Nunes</div><div class="testi-loc">Porto Alegre, RS</div></div>
+      </div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Já tinha desistido de emagrecer. Uma amiga me indicou e resolvi tentar por ser baratinho. Não imaginei que ia funcionar tão bem. Estou chocada com meu resultado!"</div>
+      <span class="testi-result">🎯 -6kg e mais disposição</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHECKOUT SECTION -->
+<section id="checkout-section">
+  <div class="checkout-card">
+    <h3>🔒 Garanta seu acesso agora</h3>
+    <p>Preencha seus dados abaixo e comece sua transformação hoje mesmo</p>
+
+    <!-- ============================================ -->
+    <!-- ÁREA EDITÁVEL — COLE SEU CHECKOUT AQUI -->
+    <!-- ============================================ -->
+    <div class="editable-area" id="checkout-placeholder">
+      <span class="edit-label">✏️ ÁREA EDITÁVEL</span>
+      <span class="placeholder-icon">🛒</span>
+      <h4>Cole o seu checkout aqui</h4>
+      <p>Substitua este bloco pelo iframe, botão ou link do seu checkout (Hotmart, Kiwify, Eduzz, etc.)</p>
+    </div>
+    <!-- ============================================ -->
+    <!-- FIM DA ÁREA EDITÁVEL -->
+    <!-- ============================================ -->
+
+    <div class="edit-instructions">
+      <strong>📌 Como personalizar o checkout:</strong>
+      Abra este arquivo em qualquer editor de texto (VS Code, Bloco de Notas, etc.). Localize o comentário <code>"COLE O SEU CHECKOUT AQUI"</code> e substitua o conteúdo da div <code>id="checkout-placeholder"</code> pelo botão ou iframe do seu checkout da Hotmart. Exemplo: <code>&lt;a href="SEU_LINK_HOTMART"&gt;Comprar agora&lt;/a&gt;</code> ou o widget embed da Hotmart.
+    </div>
+
+    <div style="margin-top:20px;text-align:center">
+      <div style="font-size:.82rem;color:#888;margin-bottom:6px">Formas de pagamento aceitas:</div>
+      <div style="font-size:1.6rem;letter-spacing:4px">💳 🏦 📱</div>
+      <div style="font-size:.75rem;color:#aaa;margin-top:4px">Cartão • Boleto • Pix</div>
+    </div>
+
+    <div style="margin-top:18px;background:#d1e7dd;border-radius:10px;padding:12px 16px;text-align:center">
+      <div style="font-size:.85rem;font-weight:700;color:#0a5933">🛡️ Garantia de 7 dias — Risco ZERO</div>
+      <div style="font-size:.78rem;color:#0a5933;margin-top:3px">Se não gostar, devolvemos 100% do seu dinheiro. Sem perguntas.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Musa Fit 60D — © 2025 Guilherme Henrique. Todos os direitos reservados.</p>
+  <p style="margin-top:6px">Este produto é vendido através da <a href="https://hotmart.com" target="_blank">Hotmart</a>. Os resultados podem variar de pessoa para pessoa.</p>
+  <p style="margin-top:6px;font-size:.72rem">Ao adquirir, você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Você tem dificuldade em manter uma rotina de exercícios?",
+    opts: ["Sim, não consigo manter por mais de 2 semanas","Às vezes consigo, às vezes não","Raramente consigo começar","Tenho consistência, mas quero acelerar resultados"]
+  },
+  {
+    q: "Qual é seu maior obstáculo para emagrecer hoje?",
+    opts: ["Falta de tempo no dia a dia","Não ter dinheiro para academia ou personal","Não saber por onde começar","Tentei várias dietas e nenhuma funcionou"]
+  },
+  {
+    q: "Há quanto tempo você tenta emagrecer sem resultado?",
+    opts: ["Menos de 6 meses","Entre 6 meses e 1 ano","Entre 1 e 3 anos","Mais de 3 anos tentando"]
+  },
+  {
+    q: "Como você descreveria seu corpo hoje?",
+    opts: ["Muito acima do peso e me sinto desanimada","Com alguns quilinhos extras e inchaço","Quase no peso ideal, mas sem definição","Com autoestima baixa por causa do corpo"]
+  },
+  {
+    q: "O que você mais quer conquistar com seu corpo?",
+    opts: ["Usar roupas que adorava e não cabem mais","Ter mais disposição e energia no dia a dia","Recuperar a autoestima e me sentir bonita","Emagrecer de forma saudável e duradoura"]
+  },
+  {
+    q: "Você está disposta a dedicar de 20 a 30 minutos por dia à sua transformação?",
+    opts: ["Sim! Estou super motivada para começar","Com certeza, só preciso de um método certo","Sim, se for em casa e sem equipamentos","Sim, estou cansada de resultados zero"]
+  }
+];
+
+let currentStep = 0;
+let selectedIdx = null;
+let answers = [];
+
+function renderStep(){
+  const q = questions[currentStep];
+  document.getElementById('step-label').textContent = `Pergunta ${currentStep+1} de ${questions.length}`;
+  document.getElementById('progress-fill').style.width = `${((currentStep+1)/questions.length)*100}%`;
+  document.getElementById('quiz-question').textContent = q.q;
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = ()=>selectOpt(i);
+    optsEl.appendChild(btn);
+  });
+  document.getElementById('btn-next').disabled = true;
+  selectedIdx = null;
+}
+
+function selectOpt(i){
+  selectedIdx = i;
+  document.querySelectorAll('.quiz-opt').forEach((el,idx)=>{
+    el.classList.toggle('selected', idx===i);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextStep(){
+  if(selectedIdx===null) return;
+  answers.push(selectedIdx);
+  currentStep++;
+  if(currentStep < questions.length){
+    renderStep();
+  } else {
+    showResult();
+  }
+}
+
+function showResult(){
+  document.getElementById('quiz-wrapper').style.display = 'none';
+  const rs = document.getElementById('result-section');
+  rs.style.display = 'block';
+  rs.classList.add('fadeshow');
+  document.getElementById('result-desc').innerHTML = `
+    <strong style="color:#d63384;font-size:1.05rem">🎯 Seu perfil: Candidata Ideal para o Musa Fit 60D!</strong><br><br>
+    Com base nas suas respostas, identificamos que você está passando pelos mesmos desafios que <strong>mais de 18.000 mulheres</strong> já superaram com o método Musa Fit 60D.<br><br>
+    O método foi criado exatamente para mulheres como você — sem tempo, sem academia e sem resultado com dietas tradicionais. Em apenas 60 dias, com treinos de 20 a 30 minutos em casa, você pode transformar seu corpo completamente. 💪
+  `;
+  rs.scrollIntoView({behavior:'smooth'});
+}
+
+renderStep();
+
+// COUNTDOWN TIMER
+let totalSeconds = 3600;
+function updateTimer(){
+  const h = Math.floor(totalSeconds/3600);
+  const m = Math.floor((totalSeconds%3600)/60);
+  const s = totalSeconds%60;
+  document.getElementById('timer-display').textContent =
+    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  if(totalSeconds > 0) totalSeconds--;
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+// SPOTS COUNTDOWN (social proof urgency)
+let spots = 23;
+function decreaseSpots(){
+  if(spots > 7){
+    spots--;
+    document.getElementById('spots-count').textContent = spots;
+  }
+}
+setInterval(decreaseSpots, Math.floor(Math.random()*60000)+45000);
+</script>
+</body>
+</html>
