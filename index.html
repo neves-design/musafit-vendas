@@ -202,9 +202,38 @@ img{max-width:100%;display:block;}
 .section-lead{font-size:.98rem; margin-bottom:28px;}
 
 .video-frame{
+  display:block;
   border-radius:var(--radius-l);
   overflow:hidden;
   box-shadow:var(--shadow-card);
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+.video-frame:hover{transform:translateY(-2px);}
+/* Wrapper responsivo (funciona em qualquer navegador, inclusive
+   os que não suportam aspect-ratio). Padrão: 16:9 (horizontal).
+   Para vídeo vertical (Reels/Stories), troque 56.25% por 177.7% */
+.video-frame-wrap{
+  position:relative;
+  width:100%;
+  padding-bottom:56.25%;
+  height:0;
+  background:var(--ink);
+}
+.video-frame-wrap iframe{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  border:0;
+}
+.video-fallback-link{
+  display:block;
+  text-align:center;
+  font-size:.82rem;
+  color:var(--gray-text);
+  padding:10px 12px;
+  background:var(--white);
+  text-decoration:underline;
 }
 .video-mock{
   aspect-ratio:9/13;
@@ -495,15 +524,25 @@ img{max-width:100%;display:block;}
     <p class="eyebrow center">assista antes de continuar</p>
     <h2 class="section-title center">Em poucos minutos você entende exatamente como funciona</h2>
 
-    <div class="video-frame" id="videoFrame">
-      <iframe
-        src="https://player.vimeo.com/video/1123904646?title=0&byline=0&portrait=0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-        style="width:100%; aspect-ratio:9/13; border:0; display:block;">
-      </iframe>
-    </div>
+    <!-- ======================================================
+         VSL — este bloco NÃO usa embed do Vimeo (evita o
+         problema de permissão de domínio). Ele mostra uma
+         prévia elegante e, ao clicar, abre o vídeo direto no
+         Vimeo em uma nova aba. Funciona sempre, sem precisar
+         mexer em nenhuma configuração de privacidade.
+
+         Se no futuro quiser trocar por um embed de verdade
+         (ex: depois de ajustar a privacidade no Vimeo, ou usando
+         o YouTube em modo "não listado"), é só substituir o
+         conteúdo do <a id="videoFrame"> por um <iframe>.
+    ======================================================= -->
+    <a href="https://vimeo.com/1123904646" target="_blank" rel="noopener" class="video-frame" id="videoFrame">
+      <div class="video-mock">
+        <div class="video-mock-play">▶</div>
+        <p>Assista à apresentação completa</p>
+        <span>Toque para abrir o vídeo</span>
+      </div>
+    </a>
   </div>
 </section>
 
