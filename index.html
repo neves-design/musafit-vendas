@@ -6,19 +6,28 @@
 <title>Receita Caseira — O passo a passo simples para retomar seu peso natural</title>
 <meta name="description" content="Um método caseiro, simples e prático para quem já tentou de tudo e quer resultados reais, sem exageros e sem complicação.">
 
+<!-- ============================================================
+     PIXEL DO META (FACEBOOK/INSTAGRAM ADS)
+============================================================ -->
 <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1017381007477608');
-    fbq('track', 'PageView');
-  </script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1017381007477608');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1017381007477608&ev=PageView&noscript=1"
+/></noscript>
 
+<!-- ============================================================
+     SCRIPT DA UTMIFY
+============================================================ -->
 <script>
   window.pixelId = "6a16f7e41bbd5e9a3c8c1034";
   var a = document.createElement("script");
@@ -28,7 +37,6 @@
   document.head.appendChild(a);
 </script>
 
-  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -487,17 +495,14 @@ img{max-width:100%;display:block;}
     <p class="eyebrow center">assista antes de continuar</p>
     <h2 class="section-title center">Em poucos minutos você entende exatamente como funciona</h2>
 
-    <!-- ======================================================
-         ÁREA DA VSL — troque o conteúdo do .video-frame pelo
-         seu player (Vimeo, Panda, YouTube não listado, etc.)
-         Exemplo: <iframe src="SEU_LINK_DE_VIDEO" ...></iframe>
-    ======================================================= -->
     <div class="video-frame" id="videoFrame">
-      <div class="video-mock">
-        <div class="video-mock-play">▶</div>
-        <p>Vídeo de apresentação</p>
-        <span>2:47 min</span>
-      </div>
+      <iframe
+        src="https://player.vimeo.com/video/1123904646?title=0&byline=0&portrait=0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        style="width:100%; aspect-ratio:9/13; border:0; display:block;">
+      </iframe>
     </div>
   </div>
 </section>
@@ -820,12 +825,11 @@ document.addEventListener('DOMContentLoaded', () => {
      (Hotmart, Kiwify, Eduzz, Stripe, etc.) — todos os
      botões da página usam essa mesma variável.
   ---------------------------------------------------- */
-  const URL_CHECKOUT = "https://checkout.applyfy.com.br/checkout/cmpogrdhy02b907ogptcha4rq?offer=WTV2HTW"; // <-- COLOQUE AQUI O LINK DO SEU CHECKOUT
+  const URL_CHECKOUT = "https://checkout.applyfy.com.br/checkout/cmpogrdhy02b907ogptcha4rq?offer=WTV2HTW";
   document.querySelectorAll('.link-checkout').forEach(el => {
     el.setAttribute('href', URL_CHECKOUT);
     el.addEventListener('click', () => {
-      // Dispare aqui eventos de pixel/conversão se necessário, ex:
-      // if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
+      if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
     });
   });
 
